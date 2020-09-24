@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'games'
-app.config["MONGO_URI"] = 'mongodb+srv://root:<asdf1234>@myfirstcluster.lcr9v.mongodb.net/<games>?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = 'mongodb+srv://root:asdf1234@myfirstcluster.lcr9v.mongodb.net/games?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -13,7 +13,12 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_games')
 def get_games():
-    return render_template("games.html", games=mongo.db.tasks.find())
+    return render_template("games.html", games=mongo.db.games.find())
+
+app.route('/addgame')
+def addgame():
+    return render_template("add_game/html")
+
 
 
 if __name__ == '__main__':

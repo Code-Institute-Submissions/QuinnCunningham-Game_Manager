@@ -1,20 +1,15 @@
-<html>
-    <head>
-    
-    
-    </head>
+{% extends 'base.html' %}
 
-    <body>
-        {% for games in games %}
-            {{games.game_name}}
-        
-        
-        
-        {% endfor %}
+{% block content %}
+<ul class="collapsible">
+     {% for games in games %}
+    <li>
+      <div class="collapsible-header"><i class="material-icons">videogame_asset</i>
+      <h5>Game Name: {{games.game_name}} Game Release Date: {{games.game_date}} Game Type: {{games.game_type}} Game Rating: {{games.game_rating}}</h5>
+      </div>
+      <div class="collapsible-body"><span>{{games.game_description}}</span></div>
+    </li>
+    {% endfor %}
+</ul>
 
-
-
-    </body>
-
-
-</html>
+{% endblock %}
