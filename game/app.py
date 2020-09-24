@@ -15,11 +15,15 @@ mongo = PyMongo(app)
 def get_games():
     return render_template("games.html", games=mongo.db.games.find())
 
-app.route('/addgame')
+@app.route('/addgame')
 def addgame():
-    return render_template("add_game/html")
+    return render_template("add_game.html")
 
-
+@app.route('/enter_games', methods=['POST'])
+def enter_games():
+    games = mongo.db.games
+    games.insert_one(request.form.to_dict())
+    return redirect(url_for('get_games'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

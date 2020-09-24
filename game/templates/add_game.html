@@ -2,8 +2,46 @@
 
 {% block content %}
 
-<h4>Add Task</h4>
-
-{% endfor %}
+<h4>Add Game To list</h4>
+<div class="row">
+    <form  action="{{url_for('enter_games') }}" method= "POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">note_add</i>
+            <input id="game_name" name="game_name" type="text" class="validate">
+            <label for="icon_prefix">Game Name </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">date_range</i>
+                <input id="game_date" name="game_date" type="text" class="validate">
+                <label for="icon_telephone">Date of Game Release</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">sports_esports</i>
+                <input id="game_type" name="game_type" type="text" class="validate">
+                <label for="icon_telephone">Type of Game</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">thumbs_up_down</i>
+                <input id="game_rating" name="game_rating" type="text" class="validate">
+                <label for="icon_telephone">Game Rating</label>
+            </div>
+            <div class="row">
+                <div class="input-field col s12"></div>
+                <i class="material-icons prefix">description</i>
+                <textarea name="game_description" id="game_description" class="materialize-textarea"></textarea>
+                <label for="icon_telephone">Game Description</label>
+            </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Game
+                <i class="material-icons right">add_task</i>
+            </button>
+        </div>
+        </div>
+    </form>
+</div>
+        
 
 {% endblock %}
