@@ -25,6 +25,32 @@ def enter_games():
     games.insert_one(request.form.to_dict())
     return redirect(url_for('get_games'))
 
+@app.route('/edit_game/<games_id>')
+def edit_game(games_id):
+    the_game = mongo.db.games.find_one({"_id":ObjectId(games_id)})
+    return render_template('editgame.html', games=the_game,)
+
+@app.route('/update_games/<games_id>', methods=['POST'])
+def update_games(games_id):
+    games = mongo.db.games
+    games.update({'_id': ObjectId(games_id)}, 
+    {
+    'game_name': request.form.get('game_name'),
+    'game_date': request.form.get('game_date'),
+    'game_type': request.form.get('game_type'),
+    'game_rating': request.form.get('game_rating'),
+    'game_description': request.form.get('game_descirption')
+    
+    })
+    return redirect(url_for('get_games'))
+
+
+@app.route('/delete_game/<games_id>')
+def delete_game(games_id):
+    mongo.db.tasks.remove({'_id': ObjectId(games_id)})
+    return redirect(url_for('get_games'))
+
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
