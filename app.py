@@ -3,9 +3,13 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+if os.path.exists("env.py"):
+    import env
+
 app = Flask(__name__)
-app.config["MONGO_DBNAME"] = 'games'
-app.config["MONGO_URI"] = 'mongodb+srv://root:asdf1234@myfirstcluster.lcr9v.mongodb.net/games?retryWrites=true&w=majority'
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
